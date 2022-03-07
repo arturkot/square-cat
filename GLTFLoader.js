@@ -1,3 +1,9 @@
+/**
+ * The loader is copy-pasted directly from the THREE repo.
+ * The only difference is about imports: they reference explicit files rather
+ * than THREE module. It allows for a smaller JS bundle.
+ */
+
 import { AnimationClip } from "three/src/animation/AnimationClip";
 import { Bone } from "three/src/objects/bone";
 import { Box3 } from "three/src/math/Box3";
