@@ -17,13 +17,14 @@ const ANIMATION_SPEED = 4;
 const CAMERA_X = -200;
 const CAMERA_Y = 200;
 const CAMERA_Z = -200;
+const HOVER_MEDIA = "(hover: hover)";
 
 const styles = new URL("./component-style.css", import.meta.url).href;
 
 const easeOutQuad = (t) => t * (2 - t);
 
 class SquareCat extends HTMLElement {
-  isHoverSupport = matchMedia("(hover: hover").matches;
+  isHoverSupport = matchMedia(HOVER_MEDIA).matches;
   catCenterXpos = window.innerWidth / 2;
   catCenterYpos = 280;
   mouseXPos = false;
@@ -65,6 +66,7 @@ class SquareCat extends HTMLElement {
     this.spotLight = new SpotLight();
 
     this.adjustSize();
+    this.adjustHoverSupport();
     this.setup();
     this.animate();
   }
@@ -81,6 +83,15 @@ class SquareCat extends HTMLElement {
       this.renderer.setSize(this.w, this.h);
     });
     observer.observe(this.shadow.host);
+  }
+
+  adjustHoverSupport() {
+    const media = matchMedia(HOVER_MEDIA);
+
+    media.addEventListener(
+      "change",
+      () => (this.isHoverSupport = media.matches)
+    );
   }
 
   setup() {
