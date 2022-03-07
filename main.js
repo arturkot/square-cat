@@ -26,8 +26,8 @@ class SquareCat extends HTMLElement {
   isHoverSupport = matchMedia("(hover: hover").matches;
   catCenterXpos = window.innerWidth / 2;
   catCenterYpos = 280;
-  mouseXpos = false;
-  mouseYpos = false;
+  mouseXPos = false;
+  mouseYPos = false;
   isAnimating = false;
   startAngle = 0;
   currentAngle = 0;
@@ -99,8 +99,8 @@ class SquareCat extends HTMLElement {
     this.camera.updateProjectionMatrix();
 
     document.addEventListener("mousemove", (event) => {
-      this.mouseXpos = event.clientX;
-      this.mouseYpos = event.clientY;
+      this.mouseXPos = event.clientX;
+      this.mouseYPos = event.clientY;
     });
 
     window.addEventListener("resize", () => {
@@ -128,13 +128,13 @@ class SquareCat extends HTMLElement {
   };
 
   updateCat() {
-    if (!this.theBody || !this.mouseXpos) return;
+    if (!this.theBody || !this.mouseXPos) return;
 
-    if (this.mouseYpos < this.catCenterYpos + 100)
-      this.mouseYpos = this.catCenterYpos;
+    if (this.mouseYPos < this.catCenterYpos + 100)
+      this.mouseYPos = this.catCenterYpos;
     const atan2 = Math.atan2(
-      this.catCenterYpos - this.mouseYpos,
-      this.catCenterXpos - this.mouseXpos
+      this.catCenterYpos - this.mouseYPos,
+      this.catCenterXpos - this.mouseXPos
     );
     const targetAngle = (atan2 * -180) / Math.PI - 45;
 
