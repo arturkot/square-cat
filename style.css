@@ -1,11 +1,5 @@
-.square-cat {
+square-cat {
   width: 422px;
   height: 488px;
-  display: block;
-  margin: 0 auto 50px;
-}
-
-.square-cat canvas {
-  max-width: 100%;
-  height: auto !important; /* overriding JS */
+  margin: 50px auto;
 }
