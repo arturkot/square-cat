@@ -111,9 +111,8 @@ class SquareCat extends HTMLElement {
     linkElem.setAttribute("rel", "stylesheet");
     linkElem.setAttribute("href", styles);
 
-    this.shadow.append(linkElem);
-
     this.loader.load(sceneUrl, this.drawCatBody);
+    this.shadow.append(linkElem);
     this.shadow.append(this.renderer.domElement);
   }
 
