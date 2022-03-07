@@ -139,7 +139,7 @@ class SquareCat extends HTMLElement {
 
     if (!this.isHoverSupport) {
       if (targetAngle === this.currentAngle) return;
-      if (!this.isAnimating) this.startAngle = currentAngle;
+      if (!this.isAnimating) this.startAngle = this.currentAngle;
       let updateAngle = this.currentAngle;
 
       if (this.isAnimating) {
@@ -161,10 +161,10 @@ class SquareCat extends HTMLElement {
         }
       }
 
-      if (currentAngle > targetAngle) {
+      if (this.currentAngle > targetAngle) {
         this.currentAngle -= ANIMATION_SPEED;
         this.isAnimating = true;
-        if (targetAngle > currentAngle) {
+        if (targetAngle > this.currentAngle) {
           this.isAnimating = false;
           this.currentAngle = targetAngle;
         }
