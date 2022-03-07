@@ -1,6 +1,6 @@
 import "./style.css";
 import textureImage from "./baked-occlusion-body.jpg";
-import sceneUrl from "./3dcat-body.gltf?url";
+import sceneUrl from "./square-cat-scene.gltf?url";
 import { Scene } from "three/src/scenes/Scene";
 import { OrthographicCamera } from "three/src/cameras/OrthographicCamera";
 import { WebGLRenderer } from "three/src/renderers/WebGLRenderer";
