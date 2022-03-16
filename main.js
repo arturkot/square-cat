@@ -18,6 +18,7 @@ const CAMERA_X = -200;
 const CAMERA_Y = 200;
 const CAMERA_Z = -200;
 const HOVER_MEDIA = "(hover: hover)";
+const THEME_MEDIA = "(prefers-color-scheme: dark)";
 
 const styles = new URL("./component-style.css", import.meta.url).href;
 
@@ -25,6 +26,7 @@ const easeOutQuad = (t) => t * (2 - t);
 
 class SquareCat extends HTMLElement {
   isHoverSupport = matchMedia(HOVER_MEDIA).matches;
+  isDarkMode = matchMedia(THEME_MEDIA).matches;
   catCenterXpos = window.innerWidth / 2;
   catCenterYpos = 280;
   mouseXPos = false;
@@ -62,13 +64,32 @@ class SquareCat extends HTMLElement {
       flatShading: true,
     });
 
-    this.hemisphereLight = new HemisphereLight(0x404040, 0xfefefe, 2);
     this.spotLight = new SpotLight();
 
     this.adjustSize();
     this.adjustHoverSupport();
     this.setup();
+    this.trackTheme();
     this.animate();
+  }
+
+  trackTheme() {
+    const media = matchMedia(THEME_MEDIA);
+
+    const handleTheme = () => {
+      this.isDarkMode = media.matches;
+
+      this.spotLight.intensity = this.isDarkMode ? 1 : 1.8;
+
+      if (this.hemisphereLight) this.scene.remove(this.hemisphereLight);
+      this.hemisphereLight = this.isDarkMode
+        ? new HemisphereLight(0xfec52e, 0x1e7ad8, 2)
+        : new HemisphereLight(0x404040, 0xfefefe, 2);
+      this.scene.add(this.hemisphereLight);
+    };
+
+    handleTheme();
+    media.addEventListener("change", handleTheme);
   }
 
   adjustSize() {
@@ -99,10 +120,8 @@ class SquareCat extends HTMLElement {
     this.renderer.setClearColor(0x000000, 0);
     this.renderer.setSize(this.w, this.h);
 
-    this.spotLight.intensity = 1.8;
     this.spotLight.position.set(400, 2000, 40);
 
-    this.scene.add(this.hemisphereLight);
     this.scene.add(this.spotLight);
 
     this.camera.position.set(CAMERA_X + 1, CAMERA_Y + 1, CAMERA_Z + 1);
